@@ -20,7 +20,6 @@ public class BoardService {
 		Connection con =  common.DBTemplate.getConnection();
 		BoardDAO dao = new BoardDAO(con);
 		result = dao.select(uid, upw);
-		
 		try {
 			if(result) {
 				con.commit();
@@ -115,6 +114,8 @@ public class BoardService {
 		BoardDAO dao = new BoardDAO(con);
 		BoardEntity result = dao.selectByNum(entity);
 		
+		con.close();
+		
 		return result;
 	}
 	
@@ -123,6 +124,8 @@ public class BoardService {
 		Connection con =  common.DBTemplate.getConnection();
 		BoardDAO dao = new BoardDAO(con);
 		ArrayList<BoardEntity> list = dao.select();
+		
+		con.close();
 		
 		return list;
 	}

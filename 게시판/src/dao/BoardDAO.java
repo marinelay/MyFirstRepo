@@ -94,6 +94,9 @@ public class BoardDAO {
  				result = false;
  			}
 			
+			rs.close();
+			pstmt.close();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -120,9 +123,9 @@ public class BoardDAO {
 				article.setArticleWriter(rs.getString("articleWriter"));
 				article.setArticleDate(rs.getString("articleDate"));
 			} 
-			
-			pstmt.close();
 			rs.close();
+			pstmt.close();
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -151,9 +154,9 @@ public class BoardDAO {
 			}
 			
 
-			
-			pstmt.close();
 			rs.close();
+			pstmt.close();
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,7 +170,6 @@ public class BoardDAO {
 		
 		
 		try {
-			Connection con = common.DBTemplate.getConnection();
 			
 			// SQL 문장을 만들어서 PreparedStatement 생성
 			String sql = "select MAX(articleNum) from board";
@@ -191,15 +193,12 @@ public class BoardDAO {
 			
 			if(count == 1) {
 				result = true;
-				con.commit();
+
 			} else {
 				result = false;
-				con.rollback();
 			}
-			
-			pstmt.close();
 			rs.close();
-			con.close();
+			pstmt.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
